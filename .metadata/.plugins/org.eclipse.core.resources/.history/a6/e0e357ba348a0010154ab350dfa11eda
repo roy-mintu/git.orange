@@ -1,0 +1,100 @@
+package pageObjects;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AdminPage {
+	private WebDriver driver;
+	private WebDriverWait wait;
+
+	public AdminPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
+	
+	@FindBy(xpath = "//li[1]//a[1]//span[1]")
+	private WebElement adminButton;
+	
+	@FindBy(xpath = "//button[normalize-space()='Add']")
+	private WebElement addButton;
+	
+	@FindBy(xpath = "(//div[@class='oxd-select-text-input'][normalize-space()='-- Select --'])[1]")
+	private WebElement userroleDropdown;
+	
+	@FindBy(xpath = "//input[@placeholder='Type for hints...']")
+	private WebElement empNameTextField;
+	
+	@FindBy(xpath = "(//div[@class='oxd-select-text-input'][normalize-space()='-- Select --'])[2]")
+	private WebElement statusDropdown;
+	
+	@FindBy(xpath = "(//input[@class='oxd-input oxd-input--active'])[2]")
+	private WebElement usernameTextField;
+	
+	@FindBy(xpath = "(//input[@type='password'])[1]")
+	private WebElement passwordTextField;
+	
+	@FindBy(xpath = "(//input[@type='password'])[2]")
+	private WebElement confirmPasswordtextField;
+	
+	@FindBy(xpath = "//button[normalize-space()='Save']")
+	private WebElement saveButton;
+	
+	@FindBy(xpath = "//p[@class='oxd-text oxd-text--p orangehrm-form-hint']")
+	private WebElement randomPlace;
+	
+	public void addUser(String empName, String userName, String password, String confirmPassword) {
+		wait.until(ExpectedConditions.elementToBeClickable(userroleDropdown));
+		userroleDropdown.click();
+		userroleDropdown.sendKeys("a");
+		randomPlace.click();
+		empNameTextField.sendKeys(empName);
+		statusDropdown.click();
+		statusDropdown.sendKeys("e");
+		randomPlace.click();
+		usernameTextField.sendKeys(userName);
+		passwordTextField.sendKeys(password);
+		confirmPasswordtextField.sendKeys(confirmPassword);
+		saveButton.click();
+	}
+	
+	public void selectUserRole() {
+		wait.until(ExpectedConditions.elementToBeClickable(userroleDropdown));
+		userroleDropdown.click();
+		userroleDropdown.sendKeys("a");
+		randomPlace.click();
+	}
+	
+	public void addEmpName(String empName) {
+		empNameTextField.sendKeys(empName);
+	}
+	
+	public void addStatus() {
+		statusDropdown.click();
+		statusDropdown.sendKeys("e");
+		randomPlace.click();
+	}
+	
+	public void addUsername(String userName) {
+		usernameTextField.sendKeys(userName);
+	}
+	
+	public void addPassword(String password) {
+		passwordTextField.sendKeys(password);
+	}
+	
+	public void confirmPassword(String confirmPassword) {
+		confirmPasswordtextField.sendKeys(confirmPassword);
+	}
+	
+	public void clickSave() {
+		saveButton.click();
+	}
+
+}

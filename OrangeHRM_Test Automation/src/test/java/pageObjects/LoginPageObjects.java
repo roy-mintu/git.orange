@@ -1,0 +1,70 @@
+package pageObjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import basePage.BasePage;
+
+public class LoginPageObjects extends BasePage{
+
+	public LoginPageObjects(WebDriver driver) {
+		super(driver);
+	}
+
+	@FindBy(xpath = "//input[@placeholder='Username']")
+	private WebElement usernameInput;
+
+	@FindBy(xpath = "//input[@placeholder='Password']")
+	private WebElement passwordInput;
+
+	@FindBy(xpath = "//button[@type='submit']")
+	private WebElement submitBut;
+
+	@FindBy(xpath = "//div[@class='orangehrm-login-slot-wrapper']//div[1]//div[1]//span[1]")
+	private WebElement emptyUsernameError;
+
+	@FindBy(xpath = "//div[@class='orangehrm-login-slot-wrapper']//div[1]//div[1]//span[1]")
+	private WebElement emptyPasswordError;
+
+	@FindBy(xpath = "//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")
+	private WebElement invalidCredsError;
+
+	@FindBy(xpath = "//h6[normalize-space()='Dashboard']")
+	private WebElement dashboard;
+
+	public void open(String url) {
+		driver.get(url);
+	}
+
+	public void login(String username, String password) {
+		wait.until(ExpectedConditions.elementToBeClickable(usernameInput));
+		usernameInput.clear();
+		usernameInput.sendKeys(username);
+		passwordInput.clear();
+		passwordInput.sendKeys(password);
+		submitBut.click();
+	}
+
+	public String getEmptyUsernameError() {
+		wait.until(ExpectedConditions.elementToBeClickable(emptyUsernameError));
+		return emptyUsernameError.getText();
+	}
+
+	public String getEmptyPasswordError() {
+		wait.until(ExpectedConditions.elementToBeClickable(emptyPasswordError));
+		return emptyPasswordError.getText();
+	}
+
+	public String getInvalidCredsError() {
+		wait.until(ExpectedConditions.elementToBeClickable(invalidCredsError));
+		return invalidCredsError.getText();
+	}
+
+	public String getDashboardText() {
+		wait.until(ExpectedConditions.elementToBeClickable(dashboard));
+		return dashboard.getText();
+	}
+
+}

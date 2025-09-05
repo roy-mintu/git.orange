@@ -1,0 +1,43 @@
+package testCases;
+
+import org.testng.annotations.Test;
+
+import pageObjects.LoginPage;
+import testBase.BaseTest;
+
+public class LoginTestCases extends BaseTest {
+
+	LoginPage login = new LoginPage(driver);
+
+	public void openApplication() {
+
+		login.open("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+	}
+
+	@Test(priority = 2)
+	public void validLogin() {
+
+		System.out.println("Test 1 Started...");
+
+		login.login("admin", "admin123");
+
+		System.out.println("Test 1 Completed...");
+	}
+
+	@Test(priority = 1)
+	public void invalidLogin() {
+
+		System.out.println("Test 2 Started...");
+
+		login.login("test", "admin123");
+
+		if (login.getInvalidCredsError().equals("Invalid credentials")) {
+			System.out.println("Test Case - Invalid Creds Passed...");
+		} else {
+			System.out.println("Test Case - Invalid Creds Failed...");
+		}
+
+		System.out.println("Test 2 Completed...");
+	}
+}

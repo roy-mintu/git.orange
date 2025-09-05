@@ -1,0 +1,43 @@
+package testCases;
+
+import org.testng.annotations.Test;
+
+import pageObjects.AdminPage;
+import pageObjects.LoginPage;
+import testBase.BaseTest;
+
+public class AdminPageTestCases extends BaseTest{
+	
+	AdminPage adminpage;
+	
+	LoginPage login;
+	
+	@Test
+	public void addUser() {
+		adminpage = new AdminPage(driver);
+		
+		login = new LoginPage(driver);
+		
+		login.open("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		
+		login.login("admin", "admin123");
+		
+		adminpage.navigateToAdmin();
+		
+		adminpage.clickOnAdd();
+		
+		adminpage.selectUserRole("Admin");
+		
+		adminpage.addEmpName("Jane Test Do");
+		
+		adminpage.addStatus("Enabled");
+		
+		adminpage.addUsername("Test Jay 2");
+		
+		adminpage.addPassword("Test123");
+		
+		adminpage.confirmPassword("Test123");
+		
+		adminpage.clickSave();
+	}
+}

@@ -1,0 +1,30 @@
+package testCases;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+
+import pageObjects.AdminPage;
+import testBase.BaseTest;
+
+public class AdminPageTestCases extends BaseTest{
+	private WebDriver driver;
+	
+	AdminPage adminpage;
+	
+	@Test
+	public void addUser() {
+		adminpage = new AdminPage(driver);
+		
+		adminpage.selectUserRole();
+		
+		adminpage.addEmpName("Test Jay");
+		
+		adminpage.addStatus();
+		
+		adminpage.addUsername("Test Jay");
+		
+		adminpage.addPassword("Test123");
+		
+		adminpage.confirmPassword("Test123");
+	}
+}

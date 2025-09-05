@@ -1,0 +1,14 @@
+package testCases;
+
+import org.openqa.selenium.WebDriver;
+
+import pageObjects.AdminPage;
+import testBase.BaseTest;
+
+public class AdminPageTestCases extends BaseTest{
+	private WebDriver driver;
+	
+	AdminPage adminpage = new AdminPage(driver);
+	
+	
+}

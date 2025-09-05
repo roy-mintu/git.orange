@@ -1,0 +1,59 @@
+package testCases;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import pageObjects.LoginPage;
+import testBase.BaseTest;
+
+public class LoginTestCases extends BaseTest {
+
+	private LoginPage login;
+
+	
+
+	@Test(priority = 1)
+	public void validLogin() {
+
+		System.out.println("Test 1 Started...");
+		
+		login = new LoginPage(driver);
+
+		login.open("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+		login.login("admin", "admin123");
+
+		System.out.println("Test 1 Completed...");
+	}
+	
+	@Test(priority = 2)
+	public void invalidUsername() {
+		System.out.println("Test 2 Started...");
+		
+		login = new LoginPage(driver);
+		
+		login.open("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		
+		login.login("Test", "admin123");
+		
+		Assert.assertEquals(login.getInvalidCredsError(), "Invalid credentials");
+		
+		System.out.println("Test 2 Completed...");
+	}
+	
+	@Test(priority = 3)
+	public void invalidPassword() {
+
+		System.out.println("Test 3 Started...");
+
+		login = new LoginPage(driver);
+
+		login.open("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+		login.login("admin", "admin");
+		
+		Assert.assertEquals(login.getInvalidCredsError(), "Invalid credentials");
+
+		System.out.println("Test 3 Completed...");
+	}
+}
