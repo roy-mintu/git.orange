@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import basePage.BasePage;
+import testBase.BasePage;
 
 public class AdminPageObjects extends BasePage{
 
